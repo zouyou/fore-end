@@ -33,7 +33,15 @@ export default {
       const self = this;
       self.$refs.ruleForm.validate(valid => {
         if (valid) {
-          self.$message("验证成功！");
+          //self.$message("验证成功！");
+          var url =
+            "user/login?username=" +
+            self.ruleForm.username +
+            "&password=" +
+            self.ruleForm.password;
+          self.$ajax.get(url).then(data => {
+            self.$router.push("/index");
+          });
         }
       });
     },
