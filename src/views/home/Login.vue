@@ -71,7 +71,7 @@ export default {
     background-color: #fff;
     border-radius: 5px;
     width: 300px;
-    height: 300px;
+    height: 260px;
     margin: auto;
     position: absolute;
     top: 0;
@@ -81,7 +81,7 @@ export default {
 }
 .ms-title {
     height: 30px;
-    padding: 40px;
+    padding: 30px;
     text-align: center;
     font-size: 30px;
     color: #0da2b3;
