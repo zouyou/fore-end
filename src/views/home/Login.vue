@@ -1,53 +1,89 @@
 <template>
-<div>
-<el-form label-position="right" :model="ruleForm" :rules="rules" ref="ruleForm" size="mini" label-width="100px">
-  <el-form-item label="账号" prop="username">
-    <el-input  v-model="ruleForm.username" auto-complete="off"></el-input>
-  </el-form-item>
-  <el-form-item label="密码" prop="password">
-    <el-input type="password" v-model="ruleForm.password" auto-complete="off"></el-input>
-  </el-form-item>
-  <el-form-item>
-    <el-button type="primary" @click="submitForm()">提交</el-button>
-    <el-button @click="resetForm()">重置</el-button>
-  </el-form-item>
-</el-form>
-</div>
+    <div class="login-wrap">
+        <div class="login-content" v-loading="loginloading" element-loading-text="正在登录...">
+            <div class="ms-title">{{logintitle}}</div>
+            <el-form label-position="right" :model="ruleForm" :rules="rules" ref="ruleForm" size="mini" label-width="0px">
+                <el-form-item label="" prop="username">
+                    <el-input v-model="ruleForm.username" class="inputwinth240">
+                        <template slot="prepend">帐号</template>
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="" prop="password">
+                    <el-input type="password" v-model="ruleForm.password" class="inputwinth240">
+                        <template slot="prepend">密码</template>
+                    </el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="submitForm()" class="inputwinth240">登录</el-button>
+                    <!-- <el-button @click="resetForm()">重置</el-button> -->
+                </el-form-item>
+            </el-form>
+        </div>
+    </div>
 </template>
 <script>
 export default {
-  data: function() {
-    return {
-      ruleForm: {
-        username: "",
-        password: ""
-      },
-      rules: {
-        username: [{ required: true, message: "请输入账号" }],
-        password: [{ required: true, message: "请输入密码" }]
-      }
-    };
-  },
-  methods: {
-    submitForm() {
-      const self = this;
-      self.$refs.ruleForm.validate(valid => {
-        if (valid) {
-          //self.$message("验证成功！");
-          var url =
-            "user/login?username=" +
-            self.ruleForm.username +
-            "&password=" +
-            self.ruleForm.password;
-          self.$ajax.get(url).then(data => {
-            self.$router.push("/index");
-          });
-        }
-      });
+    data: function() {
+        return {
+            loginloading: false,
+            logindesc: "",
+            logintitle: "后台管理系统",
+            ruleForm: {
+                username: "",
+                password: ""
+            },
+            rules: {
+                username: [{ required: true, message: "请输入账号" }],
+                password: [{ required: true, message: "请输入密码" }]
+            }
+        };
     },
-    resetForm() {
-      this.$refs.ruleForm.resetFields();
+    methods: {
+        submitForm() {
+            const self = this;
+            self.$refs.ruleForm.validate(valid => {
+                if (valid) {
+                    var url =
+                        "user/login?username=" +
+                        self.ruleForm.username +
+                        "&password=" +
+                        self.ruleForm.password;
+                    self.$ajax.get(url).then(data => {
+                        self.$router.push("/index");
+                    });
+                }
+            });
+        },
+        resetForm() {
+            this.$refs.ruleForm.resetFields();
+        }
     }
-  }
 };
 </script>
+<style scoped>
+.login-wrap {
+    width: 100%;
+    height: 100%;
+    background: #0da2b3;
+}
+.login-content {
+    text-align: center;
+    background-color: #fff;
+    border-radius: 5px;
+    width: 300px;
+    height: 300px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.ms-title {
+    height: 30px;
+    padding: 40px;
+    text-align: center;
+    font-size: 30px;
+    color: #0da2b3;
+}
+</style>
