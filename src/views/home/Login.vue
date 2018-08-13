@@ -4,12 +4,12 @@
             <div class="ms-title">{{logintitle}}</div>
             <el-form label-position="right" :model="ruleForm" :rules="rules" ref="ruleForm" size="mini" label-width="0px">
                 <el-form-item label="" prop="username">
-                    <el-input v-model="ruleForm.username" class="inputwinth240">
+                    <el-input v-model="ruleForm.username" class="inputwinth240" :maxlength="20">
                         <template slot="prepend">帐号</template>
                     </el-input>
                 </el-form-item>
                 <el-form-item label="" prop="password">
-                    <el-input type="password" v-model="ruleForm.password" class="inputwinth240">
+                    <el-input type="password" v-model="ruleForm.password" class="inputwinth240" :maxlength="20">
                         <template slot="prepend">密码</template>
                     </el-input>
                 </el-form-item>
@@ -41,16 +41,22 @@ export default {
     methods: {
         submitForm() {
             const self = this;
+            self.loginloading = true;
             self.$refs.ruleForm.validate(valid => {
                 if (valid) {
                     var url =
                         "user/login?username=" +
                         self.ruleForm.username +
                         "&password=" +
-                        self.ruleForm.password;
-                    self.$ajax.get(url).then(data => {
-                        self.$router.push("/index");
-                    });
+                        self.$cryptosha1(self.ruleForm.password).toString();
+                    self.$ajax.get(url).then(
+                        data => {
+                            self.$router.push("/index");
+                        },
+                        error => {
+                            self.loginloading = false;
+                        }
+                    );
                 }
             });
         },
