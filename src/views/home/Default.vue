@@ -1,17 +1,23 @@
 <template>
     <el-container>
         <el-header>
-            <div class="headleft" style="width:150px">
-                <span v-if="!isCollapse">后台管理系统</span>
+            <div v-if="!isCollapse" class="headleft" :style="'width:'+(!isCollapse?(asideWidthMax-20):asideWidthMin)+'px'">
+                <span>后台管理系统</span>
             </div>
             <div class="headleft" @click.prevent="collapse">
-                <i class="el-icon-tickets"></i>
+                <i class="el-icon-tickets" style="cursor: pointer;"></i>
             </div>
             <div class="headright">
                 <el-dropdown trigger="click">
-                    <span class="el-dropdown-link">
-                        <img class="user-logo" :src="userImg">
-                    </span>
+                    <table class="el-dropdown-link" border="0" style="margin-top:8px;">
+                        <tr>
+                            <td>{{userInfoDto.name}}</td>
+                            <td>
+                                <i class="el-icon-arrow-down el-icon--right"></i>
+                            </td>
+                            <td><img class="user-logo" :src="userImg"></td>
+                        </tr>
+                    </table>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item>
                             <span @click="gopath('/userOneInfo')">个人信息</span>
@@ -26,8 +32,8 @@
                 </el-dropdown>
             </div>
         </el-header>
-        <el-container>
-            <el-aside width="200px">
+        <el-container :style="'height:'+ (fullHeight-60) +'px'">
+            <el-aside :width="(!isCollapse?asideWidthMax:asideWidthMin)+'px'">
                 <el-menu v-for="item in listfuncInfoDto" :key="item.id" :unique-opened="true" :router="false" @select="menuselect" :default-active="onRoutes" class="el-menu-vertical-demo" :collapse="isCollapse">
                     <el-submenu v-if="item.subItem" :index="item.code">
                         <template slot="title">
@@ -56,8 +62,11 @@
 export default {
     data: function() {
         return {
+            fullHeight: document.documentElement.clientHeight,
+            asideWidthMax: 200,
+            asideWidthMin: 66,
             userImg: "static/img/img.jpg",
-            isCollapse: false,
+            isCollapse: true,
             userInfoDto: null,
             roleInfoDto: null,
             deptInfoDto: null,
@@ -93,19 +102,29 @@ export default {
         onRoutes() {
             return this.$route.path;
         }
+    },
+    mounted() {
+        const that = this;
+        window.onresize = () => {
+            return (() => {
+                window.fullHeight = document.documentElement.clientHeight;
+                that.fullHeight = window.fullHeight;
+            })();
+        };
     }
 };
 </script>
 <style scoped>
 .el-header,
 .el-footer {
-    line-height: 60px;
     color: white;
     background: #0da2b3;
+    padding: 0px;
 }
 
 .el-aside {
     bottom: 0;
+    box-shadow: 0px 0px 6px #ccc;
 }
 
 .el-main {
@@ -114,15 +133,13 @@ export default {
 }
 .headleft {
     float: left;
-    margin-left: 22px;
-    margin-right: 22px;
+    line-height: 60px;
+    margin-left: 26px;
     height: 60px;
 }
 .headright {
     float: right;
-    margin-left: 22px;
-    margin-right: 22px;
-    height: 60px;
+    margin-right: 20px;
 }
 
 .headright {
@@ -132,19 +149,20 @@ export default {
 }
 
 .headright .el-dropdown-link {
-    position: relative;
-    display: inline-block;
-    padding-left: 50px;
     color: #fff;
     cursor: pointer;
-    vertical-align: middle;
 }
 .headright .user-logo {
-    position: absolute;
-    left: 0;
-    top: -20px;
     width: 40px;
     height: 40px;
     border-radius: 50%;
+}
+.el-menu-item.is-active {
+    border-left: 4px solid #0da2b3;
+}
+.el-menu-item,
+.el-submenu__title {
+    height: 46px;
+    line-height: 46px;
 }
 </style>
