@@ -38,19 +38,23 @@ export default {
             }
         };
     },
+    created: function() {
+        sessionStorage.removeItem("zsylocalInfo");
+        console.clear();
+    },
     methods: {
         submitForm() {
             const self = this;
-            self.loginloading = true;
             self.$refs.ruleForm.validate(valid => {
                 if (valid) {
-                    var url =
-                        "user/login?username=" +
-                        self.ruleForm.username +
-                        "&password=" +
-                        self.$cryptosha1(self.ruleForm.password).toString();
+                    self.loginloading = true;
+                    var u = self.ruleForm;
+                    var url ="user/login?username=" + u.username + "&password=" + self.$cryptosha1(u.password).toString();
                     self.$ajax.get(url).then(
                         data => {
+                            sessionStorage.setItem("zsylocalInfo",JSON.stringify(data));
+                            self.loginloading = false;
+                            console.clear();
                             self.$router.push("/index");
                         },
                         error => {
