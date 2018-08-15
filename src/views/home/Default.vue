@@ -53,6 +53,10 @@
                 </el-menu>
             </el-aside>
             <el-main>
+                <el-tabs v-model="tabActiveName" type="card" closable @tab-remove="removeTab" @tab-click="tabClick">
+                    <el-tab-pane v-for="item in tabVals" :key="item.name" :label="item.label" :name="item.name">
+                    </el-tab-pane>
+                </el-tabs>
                 <transition name="fade">
                     <router-view></router-view>
                 </transition>
@@ -68,6 +72,13 @@ export default {
             asideWidthMax: 200,
             asideWidthMin: 66,
             userImg: "static/img/img.jpg",
+            tabActiveName: "/index",
+            tabVals: [
+                {
+                    label: "首页",
+                    name: "/index"
+                }
+            ],
             isCollapse: true,
             userInfoDto: null,
             roleInfoDto: null,
@@ -91,6 +102,10 @@ export default {
             this.isCollapse = !this.isCollapse;
         },
         menuselect(key, keyPath) {
+            this.addTab({
+                label: key,
+                name: key
+            });
             this.gopath(key);
         },
         gopath(path) {
@@ -98,6 +113,59 @@ export default {
         },
         logout() {
             this.gopath("/login");
+        },
+        addTab(tab) {
+            let newTabName = tab.name;
+            var IshasTab = false;
+            for (var item in this.tabVals) {
+                if (this.tabVals[item].name == newTabName) {
+                    IshasTab = true;
+                }
+            }
+            if (!IshasTab) {
+                for (var item in this.listfuncInfoDto) {
+                    if (this.listfuncInfoDto[item].subItem != null) {
+                        var subItems = this.listfuncInfoDto[item].subItem;
+                        for (var subItem in subItems) {
+                            if (subItems[subItem].code == newTabName) {
+                                this.tabVals.push({
+                                    label: subItems[subItem].name,
+                                    name: newTabName
+                                });
+                            }
+                        }
+                    } else if (this.listfuncInfoDto[item].code == newTabName) {
+                        this.tabVals.push({
+                            label: this.listfuncInfoDto[item].name,
+                            name: newTabName
+                        });
+                    }
+                }
+            }
+            this.tabActiveName = newTabName;
+        },
+        removeTab(targetName) {
+            if (targetName == "/index") {
+                return;
+            }
+            let activeName = this.tabActiveName;
+            var tabIndex = 0;
+            this.tabVals.forEach((tab, index) => {
+                if (tab.name === targetName) {
+                    let nextTab =
+                        this.tabVals[index + 1] || this.tabVals[index - 1];
+                    if (nextTab) {
+                        tabIndex = index;
+                        activeName = nextTab.name;
+                    }
+                }
+            });
+            if (tabIndex > 0) this.tabVals.splice(tabIndex, 1);
+            this.tabActiveName = activeName;
+            this.gopath(activeName);
+        },
+        tabClick(tab) {
+            this.gopath(tab.name);
         }
     },
     computed: {
