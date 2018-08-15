@@ -4,7 +4,7 @@
             <el-col :span="24">
                 <el-card class="box-card">
                     <div slot="header" class="clearfix">
-                        <span>关联项目</span>
+                        <span>首页</span>
                     </div>
                 </el-card>
             </el-col>

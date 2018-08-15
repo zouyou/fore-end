@@ -5,10 +5,10 @@
                 <span>后台管理系统</span>
             </div>
             <div class="headleft" @click.prevent="collapse">
-                <i class="el-icon-tickets" style="cursor: pointer;"></i>
+                <i class="fa fa-bars" style="cursor: pointer;"></i>
             </div>
             <div class="headright">
-                <el-dropdown trigger="click">
+                <el-dropdown>
                     <table class="el-dropdown-link" border="0" style="margin-top:8px;">
                         <tr>
                             <td>{{userInfoDto.name}}</td>
@@ -161,8 +161,12 @@ export default {
     border-left: 4px solid #0da2b3;
 }
 .el-menu-item,
-.el-submenu__title {
-    height: 46px;
-    line-height: 46px;
+.el-submenu__title,
+.el-submenu {
+    height: 56px;
+    line-height: 56px;
+}
+.el-menu {
+    border: none;
 }
 </style>
