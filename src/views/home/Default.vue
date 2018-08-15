@@ -41,7 +41,9 @@
                             <span slot="title">{{ item.name }}</span>
                         </template>
                         <el-menu-item-group>
-                            <el-menu-item v-for="subItem in item.subItem" :key="subItem.id" :index="subItem.code">{{ subItem.name }}</el-menu-item>
+                            <el-menu-item v-for="subItem in item.subItem" :key="subItem.id" :index="subItem.code">
+                                <span slot="title">{{ subItem.name }}</span>
+                            </el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                     <el-menu-item v-else :index="item.code">
@@ -159,12 +161,6 @@ export default {
 }
 .el-menu-item.is-active {
     border-left: 4px solid #0da2b3;
-}
-.el-menu-item,
-.el-submenu__title,
-.el-submenu {
-    height: 56px;
-    line-height: 56px;
 }
 .el-menu {
     border: none;
