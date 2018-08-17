@@ -9,7 +9,8 @@
                     </el-input>
                 </el-form-item>
                 <el-form-item label="" prop="password">
-                    <el-input type="password" v-model="ruleForm.password" class="inputwinth240" :maxlength="20">
+                    <el-input type="password" v-model="ruleForm.password" @keyup.enter.native="submitForm()"
+                     class="inputwinth240" :maxlength="20">
                         <template slot="prepend">密码</template>
                     </el-input>
                 </el-form-item>

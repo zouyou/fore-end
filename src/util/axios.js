@@ -20,9 +20,9 @@ const downloadUrl = url => {
 // request拦截器
 service.interceptors.request.use(config => {
   config.headers['Content-Type'] = 'application/json; charset=utf-8';
-  let usInfo = JSON.parse(sessionStorage.getItem("loginuserinfo"));
-  if (usInfo) {
-    var token = usInfo.Data.mUsers.Token;
+  let userallInfo = JSON.parse(sessionStorage.getItem("zsylocalInfo"));
+  if (userallInfo) {
+    var token = userallInfo.data.userInfoDto.token;
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
@@ -44,6 +44,8 @@ service.interceptors.response.use(
       Message({ showClose: true, message: res.message, type: 'warning', duration: 3 * 1000 });
       return Promise.reject({ message: res.message });
     } else {
+      if (response.config.method == "post")
+        Message({ showClose: true, message: "操作成功！", type: 'success', duration: 3 * 1000 });
       return res;
     }
   },
