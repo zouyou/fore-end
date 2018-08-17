@@ -1,6 +1,7 @@
 # fore-end
 
-> 前端项目 咨询QQ:511570155
+> 前端项目 咨询QQ:511570155 超简单vue后台管理系统
+  (vue2+ElementUI2+axios)
 
 ![image](https://github.com/zouyou/fore-end/blob/dev/src/assets/login.png)
 ![image](https://github.com/zouyou/fore-end/blob/dev/src/assets/index.png)
