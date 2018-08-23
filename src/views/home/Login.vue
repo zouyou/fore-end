@@ -9,8 +9,7 @@
                     </el-input>
                 </el-form-item>
                 <el-form-item label="" prop="password">
-                    <el-input type="password" v-model="ruleForm.password" @keyup.enter.native="submitForm()"
-                     class="inputwinth240" :maxlength="20">
+                    <el-input type="password" v-model="ruleForm.password" @keyup.enter.native="submitForm()" class="inputwinth240" :maxlength="20">
                         <template slot="prepend">密码</template>
                     </el-input>
                 </el-form-item>
@@ -41,6 +40,7 @@ export default {
     },
     created: function() {
         sessionStorage.removeItem("zsylocalInfo");
+        sessionStorage.removeItem("zsylocalTabs");
         console.clear();
     },
     methods: {
@@ -50,10 +50,17 @@ export default {
                 if (valid) {
                     self.loginloading = true;
                     var u = self.ruleForm;
-                    var url ="user/login?username=" + u.username + "&password=" + self.$cryptosha1(u.password).toString();
+                    var url =
+                        "user/login?username=" +
+                        u.username +
+                        "&password=" +
+                        self.$cryptosha1(u.password).toString();
                     self.$ajax.get(url).then(
                         data => {
-                            sessionStorage.setItem("zsylocalInfo",JSON.stringify(data));
+                            sessionStorage.setItem(
+                                "zsylocalInfo",
+                                JSON.stringify(data)
+                            );
                             self.loginloading = false;
                             console.clear();
                             self.$router.push("/index");

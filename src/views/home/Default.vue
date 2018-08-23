@@ -34,14 +34,14 @@
         </el-header>
         <el-container :style="'height:'+ (fullHeight-60) +'px'">
             <el-aside :width="(!isCollapse?asideWidthMax:asideWidthMin)+'px'">
-                <el-menu v-for="item in listfuncInfoDto" :key="item.id" :unique-opened="true" :router="false" @select="menuselect" :default-active="onRoutes" class="el-menu-vertical-demo" :collapse="isCollapse">
+                <el-menu v-for="(item,i) in listfuncInfoDto" :key="i" :unique-opened="true" :router="false" @select="menuselect" :default-active="onRoutes" class="el-menu-vertical-demo" :collapse="isCollapse">
                     <el-submenu v-if="item.subItem" :index="item.code">
                         <template slot="title">
                             <i :class="item.styleName"></i>
                             <span slot="title">{{ item.name }}</span>
                         </template>
                         <el-menu-item-group>
-                            <el-menu-item v-for="subItem in item.subItem" :key="subItem.id" :index="subItem.code">
+                            <el-menu-item v-for="(subItem,k) in item.subItem" :key="k" :index="subItem.code">
                                 <span slot="title">{{ subItem.name }}</span>
                             </el-menu-item>
                         </el-menu-item-group>

@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-row>
-            <el-col :span="21">
+            <el-col :span="20">
                 <el-row style="margin-bottom:6px; padding:0 100px;">
                     <el-input v-model="queryData.routePath" placeholder="路由" :maxlength="20" size="mini" class="inputwinth150">
                         <template slot="prepend">路由</template>
@@ -21,7 +21,7 @@
                     <el-button size="mini" icon="fa fa-sign-out" @click="exportExcel"> 导出</el-button>
                 </el-row>
             </el-col>
-            <el-col :span="3">
+            <el-col :span="4">
                 <el-button size="mini" @click="cleanData" icon="fa fa-eraser"> 清 空</el-button>
                 <el-button size="mini" @click="getPageData" icon="el-icon-search">查 询</el-button>
             </el-col>
