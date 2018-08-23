@@ -73,12 +73,7 @@ export default {
             asideWidthMin: 66,
             userImg: "static/img/img.jpg",
             tabActiveName: "/index",
-            tabVals: [
-                {
-                    label: "首页",
-                    name: "/index"
-                }
-            ],
+            tabVals: [],
             isCollapse: true,
             userInfoDto: null,
             roleInfoDto: null,
@@ -96,6 +91,16 @@ export default {
         } else {
             this.gopath("/login");
         }
+        var tabList = JSON.parse(sessionStorage.getItem("zsylocalTabs"));
+        if (tabList) {
+            this.tabVals = tabList;
+        } else {
+            this.tabVals.push({ label: "首页", name: "/index" });
+        }
+        this.addTab({
+            label: this.$route.path,
+            name: this.$route.path
+        }); //选中选项卡
     },
     methods: {
         collapse: function() {
@@ -132,6 +137,10 @@ export default {
                                     label: subItems[subItem].name,
                                     name: newTabName
                                 });
+                                sessionStorage.setItem(
+                                    "zsylocalTabs",
+                                    JSON.stringify(this.tabVals)
+                                );
                             }
                         }
                     } else if (this.listfuncInfoDto[item].code == newTabName) {
@@ -139,6 +148,10 @@ export default {
                             label: this.listfuncInfoDto[item].name,
                             name: newTabName
                         });
+                        sessionStorage.setItem(
+                            "zsylocalTabs",
+                            JSON.stringify(this.tabVals)
+                        );
                     }
                 }
             }
