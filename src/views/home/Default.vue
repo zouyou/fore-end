@@ -210,10 +210,6 @@ export default {
 .headright {
     float: right;
     margin-right: 20px;
-}
-
-.headright {
-    float: right;
     font-size: 16px;
     color: #fff;
 }

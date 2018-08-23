@@ -23,3 +23,4 @@ html,body,#app{margin:0;padding:0;width: 100%;height: 100%;overflow: hidden;}
 .el-table .success-row {background: #f0f9eb;}
 .el-radio+.el-radio{margin-left: 10px;}
 .el-radio__label{padding-left: 6px;}
+.el-tabs--card>.el-tabs__header .el-tabs__item.is-active.is-closable .el-icon-close, .el-tabs--card>.el-tabs__header .el-tabs__item.is-closable:hover .el-icon-close{width: 20px;height: 20px;line-height: 20px;font-size: 20px;}
