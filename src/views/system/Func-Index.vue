@@ -17,7 +17,7 @@
                 </el-row>
                 <el-row>
                     <el-button size="mini" icon="el-icon-plus" @click="openDialog('新增',0)">新增</el-button>
-                    <el-button size="mini" icon="fa fa-sign-in" > 导入</el-button>
+                    <el-button size="mini" icon="fa fa-sign-in"> 导入</el-button>
                     <el-button size="mini" icon="fa fa-sign-out" @click="exportExcel"> 导出</el-button>
                 </el-row>
             </el-col>
@@ -26,58 +26,7 @@
                 <el-button size="mini" @click="getPageData" icon="el-icon-search">查 询</el-button>
             </el-col>
         </el-row>
-        <el-dialog :title="dialogTitle" :visible.sync="dialogShow">
-            <el-form size="mini" :inline="true">
-                <el-form-item label="">
-                    <el-input v-model="currentData.routePath" placeholder="路由" :maxlength="60" class="inputwinth192">
-                        <template slot="prepend">路由</template>
-                    </el-input>
-                </el-form-item>
-                <el-form-item label="">
-                    <el-input v-model="currentData.styleName" placeholder="类名" :maxlength="60" class="inputwinth192">
-                        <template slot="prepend">类名</template>
-                    </el-input>
-                </el-form-item>
-                <el-form-item label="">
-                    <el-input v-model="currentData.levelVal" placeholder="类型" :maxlength="20" class="inputwinth192">
-                        <template slot="prepend">类型</template>
-                    </el-input>
-                </el-form-item>
-                <el-form-item label="">
-                    <el-input v-model="currentData.code" placeholder="编码" :maxlength="20" class="inputwinth192">
-                        <template slot="prepend">编码</template>
-                    </el-input>
-                </el-form-item>
-                <el-form-item label="">
-                    <el-input v-model="currentData.name" placeholder="名称" :maxlength="20" class="inputwinth192">
-                        <template slot="prepend">名称</template>
-                    </el-input>
-                </el-form-item>
-                <el-form-item label="">
-                    <el-input v-model="currentData.remarks" placeholder="描述" :maxlength="60" class="inputwinth192">
-                        <template slot="prepend">描述</template>
-                    </el-input>
-                </el-form-item>
-                <el-form-item label="">
-                    <el-input v-model="currentData.parentId" placeholder="父级" :maxlength="20" class="inputwinth192">
-                        <template slot="prepend">父级</template>
-                    </el-input>
-                </el-form-item>
-                <el-form-item label="">
-                    <el-input v-model="currentData.sortNum" placeholder="排序" :maxlength="20" class="inputwinth192">
-                        <template slot="prepend">排序</template>
-                    </el-input>
-                </el-form-item>
-                <el-form-item label="状态" label-width="40px">
-                    <el-radio v-model="currentData.is_Enable" :label="1">启用</el-radio>
-                    <el-radio v-model="currentData.is_Enable" :label="0">弃用</el-radio>
-                </el-form-item>
-            </el-form>
-            <div slot="footer" class="dialog-footer">
-                <el-button size="mini" icon="fa fa-file-o" @click="dialogShow = false"> 取 消</el-button>
-                <el-button size="mini" icon="fa fa-file-text-o" type="primary" @click="saveDialog"> 保 存</el-button>
-            </div>
-        </el-dialog>
+        <func-dialog :dialogTitle="dialogTitle" :dialogShow.sync="dialogShow" :dialogData="dialogData" @RefreshData="getPageData"></func-dialog>
         <el-table :data="tableData" :row-class-name="tableRowClassName" size="mini" v-loading="loadingdata" element-loading-text="正在加载中..." border>
             <el-table-column type="expand">
                 <template slot-scope="props">
@@ -147,16 +96,12 @@
     </el-row>
 </template>
 <script>
+import funcdialog from "@/views/system/dialog/Func-Dialog";
 export default {
+    components: { "func-dialog": funcdialog },
     data() {
         return {
-            currentData: {
-                id: 0,
-                code: "",
-                name: "",
-                is_Enable: 1,
-                is_Delete: 0
-            },
+            dialogData: { id: 0, is_Enable: 1, is_Delete: 0 },
             queryData: {
                 routePath: "",
                 code: "",
@@ -237,42 +182,18 @@ export default {
             this.dialogShow = true;
             if (id > 0) {
                 this.$ajax.get("funcInfo/findOne?id=" + id).then(res => {
-                    this.currentData = res.data;
+                    this.dialogData = res.data;
                 });
             } else {
-                this.currentData = {
-                    id: 0,
-                    code: "",
-                    name: "",
-                    is_Enable: 1,
-                    is_Delete: 0
-                };
+                this.dialogData = { id: 0, is_Enable: 1, is_Delete: 0 };
             }
-        },
-        saveDialog() {
-            var submitMethod =
-                this.currentData.id > 0 ? "updateOne" : "insertOne";
-            this.$ajax
-                .post("funcInfo/" + submitMethod, this.currentData)
-                .then(res => {
-                    this.currentData = res.data;
-                    this.dialogShow = false;
-                    this.getPageData();
-                });
         },
         delId(id) {
             this.$ajax.post("funcInfo/deleteOne?id=" + id).then(res => {
                 this.getPageData();
             });
         },
-        exportExcel(){
-
-        }
-    },
-    computed: {
-        onStatus(val) {
-            return val == 1 ? true : false;
-        }
+        exportExcel() {}
     }
 };
 </script>
