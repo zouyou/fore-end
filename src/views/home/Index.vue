@@ -75,14 +75,12 @@ export default {
             return "";
         },
         getPageData() {
-            var condition = this.getcondition();
             var getpath =
                 this.moduleName +
                 "/findAll?pIndex=" +
                 this.pIndex +
                 "&pSize=" +
-                this.pSize +
-                condition;
+                this.pSize;
             this.loadingdata = true;
             this.$ajax.get(getpath).then(
                 res => {

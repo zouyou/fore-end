@@ -3,16 +3,15 @@
         <el-row>
             <el-col :span="20">
                 <el-row style="margin-bottom:6px; padding:0 100px;">
-                    <el-input v-model="queryData.code" placeholder="姓名" :maxlength="20" size="mini" class="inputwinth150">
-                        <template slot="prepend">姓名</template>
+                    <el-input v-model="queryData.name" placeholder="任务名称" :maxlength="20" size="mini" class="inputwinth150">
+                        <template slot="prepend">任务名称</template>
                     </el-input>
-                    <el-radio v-model="queryData.is_Enable" :label="1">启用</el-radio>
-                    <el-radio v-model="queryData.is_Enable" :label="0">弃用</el-radio>
+                    <el-input v-model="queryData.code" placeholder="任务编码" :maxlength="20" size="mini" class="inputwinth150">
+                        <template slot="prepend">任务编码</template>
+                    </el-input>
                 </el-row>
                 <el-row>
                     <el-button size="mini" icon="el-icon-plus" @click="openDialog('新增',0)">新增</el-button>
-                    <el-button size="mini" icon="fa fa-sign-in"> 导入</el-button>
-                    <el-button size="mini" icon="fa fa-sign-out" @click="exportExcel"> 导出</el-button>
                 </el-row>
             </el-col>
             <el-col :span="4">
@@ -20,27 +19,23 @@
                 <el-button size="mini" @click="getPageData" icon="el-icon-search">查 询</el-button>
             </el-col>
         </el-row>
-        <student-dialog :dialogTitle="dialogTitle" :dialogShow.sync="dialogShow" :dialogData="dialogData" @RefreshData="getPageData"></student-dialog>
+        <quartz-dialog :dialogTitle="dialogTitle" :dialogShow.sync="dialogShow" :dialogData="dialogData" @RefreshData="getPageData"></quartz-dialog>
         <el-table :data="tableData" :row-class-name="tableRowClassName" size="mini" v-loading="loadingdata" element-loading-text="正在加载中..." border>
             <el-table-column type="index" label="序号" width="50">
             </el-table-column>
-            <el-table-column prop="code" label="姓名">
+            <el-table-column prop="code" label="任务编码">
             </el-table-column>
-            <el-table-column prop="name" label="学号" width="100">
+            <el-table-column prop="name" label="任务名称" width="150">
             </el-table-column>
-            <el-table-column prop="phoneNum" label="手机号码" width="100">
+            <el-table-column prop="remarks" label="任务描述" width="150">
             </el-table-column>
-            <el-table-column label="性别" width="70">
-                <template slot-scope="prop">
-                    <span v-html="prop.row.is_Male==1?'男':'女'"></span>
-                </template>
+            <el-table-column prop="jobGroup" label="任务分组" width="150">
             </el-table-column>
-            <el-table-column prop="sortNum" label="排序" sortable width="70">
+            <el-table-column prop="jobStatus" label="任务状态" width="150">
             </el-table-column>
-            <el-table-column label="状态" width="70">
-                <template slot-scope="prop">
-                    <span v-html="prop.row.is_Enable==1?'启用':'弃用'"></span>
-                </template>
+            <el-table-column prop="jobCron" label="任务表达式" width="150">
+            </el-table-column>
+            <el-table-column prop="sortNum" label="排序" sortable width="100">
             </el-table-column>
             <el-table-column label="操作" width="100">
                 <template slot-scope="prop">
@@ -54,18 +49,19 @@
     </el-row>
 </template>
 <script>
-import studentdialog from "@/views/student/dialog/Student-Dialog";
+import quartzdialog from "@/views/system/dialog/Quartz-Dialog";
 export default {
-    components: { "student-dialog": studentdialog },
+    components: { "quartz-dialog": quartzdialog },
     data() {
         return {
             dialogData: { id: 0, is_Enable: 1, is_Delete: 0 },
             queryData: {
+                routePath: "",
                 code: "",
                 name: "",
                 is_Enable: ""
             },
-            moduleName: "student",
+            moduleName: "quartz",
             pIndex: 1,
             pSize: 10,
             totalNum: 0,
@@ -82,6 +78,7 @@ export default {
     methods: {
         cleanData() {
             this.queryData = {
+                routePath: "",
                 code: "",
                 name: "",
                 is_Enable: ""
@@ -145,7 +142,7 @@ export default {
                         this.dialogData = res.data;
                     });
             } else {
-                this.dialogData = { id: 0, is_Enable: 1, is_Delete: 0 };
+                this.dialogData = { id: 0, is_Enable: 1, jobStatus: 0 };
             }
         },
         delId(id) {
@@ -154,8 +151,7 @@ export default {
                 .then(res => {
                     this.getPageData();
                 });
-        },
-        exportExcel() {}
+        }
     }
 };
 </script>

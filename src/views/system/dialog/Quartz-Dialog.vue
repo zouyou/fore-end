@@ -2,38 +2,32 @@
     <el-dialog :title="dialogTitle" :visible.sync="dialogShow" @close="$emit('update:dialogShow', false)">
         <el-form size="mini" :inline="true">
             <el-form-item label="">
-                <el-input v-model="dialogData.routePath" placeholder="路由" :maxlength="60" class="inputwinth192">
-                    <template slot="prepend">路由</template>
+                <el-input v-model="dialogData.code" placeholder="任务编码" :maxlength="20" class="inputwinth192">
+                    <template slot="prepend">任务编码</template>
                 </el-input>
             </el-form-item>
             <el-form-item label="">
-                <el-input v-model="dialogData.styleName" placeholder="类名" :maxlength="60" class="inputwinth192">
-                    <template slot="prepend">类名</template>
+                <el-input v-model="dialogData.name" placeholder="任务名称" :maxlength="20" class="inputwinth192">
+                    <template slot="prepend">任务名称</template>
                 </el-input>
             </el-form-item>
             <el-form-item label="">
-                <el-input v-model="dialogData.levelVal" placeholder="类型" :maxlength="20" class="inputwinth192">
-                    <template slot="prepend">类型</template>
+                <el-input v-model="dialogData.remarks" placeholder="任务描述" :maxlength="20" class="inputwinth192">
+                    <template slot="prepend">任务描述</template>
                 </el-input>
             </el-form-item>
             <el-form-item label="">
-                <el-input v-model="dialogData.code" placeholder="编码" :maxlength="20" class="inputwinth192">
-                    <template slot="prepend">编码</template>
+                <el-input v-model="dialogData.jobGroup" placeholder="任务分组" :maxlength="20" class="inputwinth192">
+                    <template slot="prepend">任务分组</template>
                 </el-input>
             </el-form-item>
-            <el-form-item label="">
-                <el-input v-model="dialogData.name" placeholder="名称" :maxlength="20" class="inputwinth192">
-                    <template slot="prepend">名称</template>
-                </el-input>
+            <el-form-item label="任务状态" label-width="80px">
+                <el-radio v-model="dialogData.jobStatus" :label="1">运行</el-radio>
+                <el-radio v-model="dialogData.jobStatus" :label="0">停止</el-radio>
             </el-form-item>
             <el-form-item label="">
-                <el-input v-model="dialogData.remarks" placeholder="描述" :maxlength="60" class="inputwinth192">
-                    <template slot="prepend">描述</template>
-                </el-input>
-            </el-form-item>
-            <el-form-item label="">
-                <el-input v-model="dialogData.parentId" placeholder="父级" :maxlength="20" class="inputwinth192">
-                    <template slot="prepend">父级</template>
+                <el-input v-model="dialogData.jobCron" placeholder="*/1 ****?" :maxlength="20" class="inputwinth192">
+                    <template slot="prepend">任务表达式</template>
                 </el-input>
             </el-form-item>
             <el-form-item label="">
@@ -57,7 +51,7 @@
 export default {
     data() {
         return {
-            moduleName: "funcInfo"
+            moduleName: "quartz",
         };
     },
     props: {
@@ -83,6 +77,8 @@ export default {
             });
         }
     },
-    watch: {}
+    watch: {
+   
+    }
 };
 </script>
