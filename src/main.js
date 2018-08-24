@@ -12,6 +12,7 @@ import moment from 'moment';
 import 'font-awesome/css/font-awesome.min.css';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+import spantxt from '@/views/components/SpanTxt';
 
 
 Vue.prototype.$ajax = axios;
@@ -39,6 +40,7 @@ router.afterEach(transition => {
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI, { size: 'medium' });
+Vue.component("span-txt", spantxt);
 
 new Vue({
   el: '#app',

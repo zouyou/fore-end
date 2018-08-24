@@ -25,6 +25,7 @@
 export default {
     data: function() {
         return {
+            moduleName: "userInfo",
             loginloading: false,
             logindesc: "",
             logintitle: "后台管理系统",
@@ -51,7 +52,8 @@ export default {
                     self.loginloading = true;
                     var u = self.ruleForm;
                     var url =
-                        "user/login?username=" +
+                        this.moduleName +
+                        "/login?username=" +
                         u.username +
                         "&password=" +
                         self.$cryptosha1(u.password).toString();

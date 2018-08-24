@@ -67,19 +67,19 @@
             </el-table-column>
             <el-table-column prop="styleName" label="类名" width="180">
             </el-table-column>
-            <el-table-column prop="levelVal" label="类型" width="80">
+            <el-table-column prop="levelVal" label="类型" width="70">
             </el-table-column>
             <el-table-column prop="code" label="编码" width="150">
             </el-table-column>
             <el-table-column prop="name" label="名称" width="100">
             </el-table-column>
-            <el-table-column prop="remarks" label="描述" width="80">
+            <el-table-column prop="remarks" label="描述" width="70">
             </el-table-column>
-            <el-table-column prop="parentId" label="父级" sortable width="80">
+            <el-table-column prop="parentId" label="父级" sortable width="70">
             </el-table-column>
-            <el-table-column prop="sortNum" label="排序" sortable width="80">
+            <el-table-column prop="sortNum" label="排序" sortable width="70">
             </el-table-column>
-            <el-table-column label="状态" width="80">
+            <el-table-column label="状态" width="70">
                 <template slot-scope="prop">
                     <span v-html="prop.row.is_Enable==1?'启用':'弃用'"></span>
                 </template>
@@ -108,6 +108,7 @@ export default {
                 name: "",
                 is_Enable: ""
             },
+            moduleName: "funcInfo",
             pIndex: 1,
             pSize: 10,
             totalNum: 0,
@@ -160,7 +161,8 @@ export default {
         getPageData() {
             var condition = this.getcondition();
             var getpath =
-                "funcInfo/findAll?pIndex=" +
+                this.moduleName +
+                "/findAll?pIndex=" +
                 this.pIndex +
                 "&pSize=" +
                 this.pSize +
@@ -181,17 +183,21 @@ export default {
             this.dialogTitle = title;
             this.dialogShow = true;
             if (id > 0) {
-                this.$ajax.get("funcInfo/findOne?id=" + id).then(res => {
-                    this.dialogData = res.data;
-                });
+                this.$ajax
+                    .get(this.moduleName + "/findOne?id=" + id)
+                    .then(res => {
+                        this.dialogData = res.data;
+                    });
             } else {
                 this.dialogData = { id: 0, is_Enable: 1, is_Delete: 0 };
             }
         },
         delId(id) {
-            this.$ajax.post("funcInfo/deleteOne?id=" + id).then(res => {
-                this.getPageData();
-            });
+            this.$ajax
+                .post(this.moduleName + "/deleteOne?id=" + id)
+                .then(res => {
+                    this.getPageData();
+                });
         },
         exportExcel() {}
     }

@@ -2,38 +2,32 @@
     <el-dialog :title="title" :visible.sync="show" @close="$emit('update:dialogShow', false)">
         <el-form size="mini" :inline="true">
             <el-form-item label="">
-                <el-input v-model="data.routePath" placeholder="路由" :maxlength="60" class="inputwinth192">
-                    <template slot="prepend">路由</template>
+                <el-input v-model="data.code" placeholder="用户名" :maxlength="60" class="inputwinth192">
+                    <template slot="prepend">用户名</template>
                 </el-input>
             </el-form-item>
             <el-form-item label="">
-                <el-input v-model="data.styleName" placeholder="类名" :maxlength="60" class="inputwinth192">
-                    <template slot="prepend">类名</template>
+                <el-input v-model="data.name" placeholder="真实姓名" :maxlength="60" class="inputwinth192">
+                    <template slot="prepend">真实姓名</template>
                 </el-input>
             </el-form-item>
             <el-form-item label="">
-                <el-input v-model="data.levelVal" placeholder="类型" :maxlength="20" class="inputwinth192">
-                    <template slot="prepend">类型</template>
+                <el-input v-model="data.phoneNum" placeholder="手机号码" :maxlength="20" class="inputwinth192">
+                    <template slot="prepend">手机号码</template>
+                </el-input>
+            </el-form-item>
+            <el-form-item label="性别" label-width="110px">
+                <el-radio v-model="data.is_Male" :label="1">男</el-radio>
+                <el-radio v-model="data.is_Male" :label="0">女</el-radio>
+            </el-form-item>
+            <el-form-item label="">
+                <el-input v-model="data.name" placeholder="角色" :maxlength="20" class="inputwinth192">
+                    <template slot="prepend">角色</template>
                 </el-input>
             </el-form-item>
             <el-form-item label="">
-                <el-input v-model="data.code" placeholder="编码" :maxlength="20" class="inputwinth192">
-                    <template slot="prepend">编码</template>
-                </el-input>
-            </el-form-item>
-            <el-form-item label="">
-                <el-input v-model="data.name" placeholder="名称" :maxlength="20" class="inputwinth192">
-                    <template slot="prepend">名称</template>
-                </el-input>
-            </el-form-item>
-            <el-form-item label="">
-                <el-input v-model="data.remarks" placeholder="描述" :maxlength="60" class="inputwinth192">
-                    <template slot="prepend">描述</template>
-                </el-input>
-            </el-form-item>
-            <el-form-item label="">
-                <el-input v-model="data.parentId" placeholder="父级" :maxlength="20" class="inputwinth192">
-                    <template slot="prepend">父级</template>
+                <el-input v-model="data.remarks" placeholder="部门" :maxlength="60" class="inputwinth192">
+                    <template slot="prepend">部门</template>
                 </el-input>
             </el-form-item>
             <el-form-item label="">
@@ -57,7 +51,7 @@
 export default {
     data() {
         return {
-            moduleName: "funcInfo",
+            moduleName: "userInfo",
             title: this.dialogTitle,
             show: this.dialogShow,
             data: this.dialogData
