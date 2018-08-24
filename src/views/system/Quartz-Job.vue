@@ -142,7 +142,12 @@ export default {
                         this.dialogData = res.data;
                     });
             } else {
-                this.dialogData = { id: 0, is_Enable: 1, jobStatus: 0 };
+                this.dialogData = {
+                    id: 0,
+                    is_Enable: 1,
+                    is_Delete: 0,
+                    jobStatus: 0
+                };
             }
         },
         delId(id) {
