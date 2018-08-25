@@ -9,6 +9,8 @@ html,body,#app{margin:0;padding:0;width: 100%;height: 100%;overflow: hidden;}
 .inputwinth150{width: 150px}
 .inputwinth192{width: 192px}
 .inputwinth240{width: 240px}
+.inputwinth260{width: 260px}
+.inputwinth295{width: 295px}
 .el-menu-item{height: 36px;line-height: 36px}
 .el-table--mini td, .el-table--mini th {padding: 0 0;}
 .el-table{margin-top: 10px;}
@@ -25,3 +27,6 @@ html,body,#app{margin:0;padding:0;width: 100%;height: 100%;overflow: hidden;}
 .el-radio+.el-radio{margin-left: 10px;}
 .el-radio__label{padding-left: 6px;}
 .el-tabs--card>.el-tabs__header .el-tabs__item.is-active.is-closable .el-icon-close, .el-tabs--card>.el-tabs__header .el-tabs__item.is-closable:hover .el-icon-close{width: 20px;height: 20px;line-height: 20px;font-size: 20px;}
+.el-form-item--mini.el-form-item, .el-form-item--small.el-form-item{margin-bottom: 10px;}
+.el-dialog__body{padding-top: 0px;padding-bottom: 0px;}
+.el-dialog__footer{padding-top: 0px;padding-right: 15px;}

@@ -27,7 +27,7 @@
             </el-table-column>
             <el-table-column prop="name" label="任务名称" width="150">
             </el-table-column>
-            <el-table-column prop="remarks" label="任务描述" width="150">
+            <el-table-column prop="remarks" label="路由地址" width="260">
             </el-table-column>
             <el-table-column prop="jobGroup" label="任务分组" width="150">
             </el-table-column>

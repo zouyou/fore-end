@@ -12,23 +12,23 @@
                 </el-input>
             </el-form-item>
             <el-form-item label="">
-                <el-input v-model="dialogData.remarks" placeholder="任务描述" :maxlength="20" class="inputwinth192">
-                    <template slot="prepend">任务描述</template>
+                <el-input v-model="dialogData.jobGroup" placeholder="任务分组" :maxlength="20" class="inputwinth192">
+                    <template slot="prepend">任务分组</template>
                 </el-input>
             </el-form-item>
             <el-form-item label="">
-                <el-input v-model="dialogData.jobGroup" placeholder="任务分组" :maxlength="20" class="inputwinth192">
-                    <template slot="prepend">任务分组</template>
+                <el-input v-model="dialogData.remarks" placeholder="路由地址" :maxlength="20" class="inputwinth295">
+                    <template slot="prepend">路由地址</template>
+                </el-input>
+            </el-form-item>
+            <el-form-item label="">
+                <el-input v-model="dialogData.jobCron" placeholder="*/1 ****?" :maxlength="20" class="inputwinth295">
+                    <template slot="prepend">任务表达式</template>
                 </el-input>
             </el-form-item>
             <el-form-item label="任务状态" label-width="80px">
                 <el-radio v-model="dialogData.jobStatus" :label="1">运行</el-radio>
                 <el-radio v-model="dialogData.jobStatus" :label="0">停止</el-radio>
-            </el-form-item>
-            <el-form-item label="">
-                <el-input v-model="dialogData.jobCron" placeholder="*/1 ****?" :maxlength="20" class="inputwinth192">
-                    <template slot="prepend">任务表达式</template>
-                </el-input>
             </el-form-item>
             <el-form-item label="">
                 <el-input v-model="dialogData.sortNum" placeholder="排序" :maxlength="20" class="inputwinth192">
@@ -51,7 +51,7 @@
 export default {
     data() {
         return {
-            moduleName: "quartz",
+            moduleName: "quartz"
         };
     },
     props: {
@@ -77,8 +77,6 @@ export default {
             });
         }
     },
-    watch: {
-   
-    }
+    watch: {}
 };
 </script>

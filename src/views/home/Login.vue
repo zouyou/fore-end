@@ -14,7 +14,7 @@
                     </el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="submitForm()" class="inputwinth240">登录</el-button>
+                    <el-button type="primary" @click="submitForm()" class="inputwinth240 login-height">登录</el-button>
                     <!-- <el-button @click="resetForm()">重置</el-button> -->
                 </el-form-item>
             </el-form>
@@ -85,6 +85,9 @@ export default {
     width: 100%;
     height: 100%;
     background: #0da2b3;
+}
+.login-height{
+    height: 36px;
 }
 .login-content {
     text-align: center;
