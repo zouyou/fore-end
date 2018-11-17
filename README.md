@@ -6,7 +6,9 @@
 ![image](https://github.com/zouyou/fore-end/blob/dev/src/assets/login.png)
 ![image](https://github.com/zouyou/fore-end/blob/dev/src/assets/index.png)
 
-用户名：admin 密码:admin123
+http://106.12.129.240/zsy-crm/dist/index.html#/login 用户名:root 密码:admin123
+http://106.12.211.124/zsy-crm/index.html#/login 用户名:root 密码:admin123
+
 
 ## Build Setup
 
