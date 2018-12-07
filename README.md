@@ -7,8 +7,7 @@
 
 >（springmvc/mybatis/JWT安全验证/分页控件/druid加入swagger/上传附件/excel导入导出/quartz定时任务/流程引擎）
 
-http://106.12.129.240/zsy-crm/dist/index.html#/login 用户名:root 密码:admin123
-http://106.12.211.124/zsy-crm/index.html#/login 用户名:root 密码:admin123
+http://www.zsyai.top/zsy-crm/dist/index.html#/login 用户名:root 密码:admin123
 
 ![image](https://github.com/zouyou/fore-end/blob/dev/src/assets/login.png)
 ![image](https://github.com/zouyou/fore-end/blob/dev/src/assets/index.png)
